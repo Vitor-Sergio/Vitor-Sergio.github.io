@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculadora de IMC</title>
+<style>
+    body { font-family: Arial; background:#f1f1f1; display:flex; justify-content:center; padding-top:60px; }
+    .box { background:white; width:300px; padding:20px; border-radius:10px; box-shadow:0 0 10px rgba(0,0,0,0.2); }
+    h2 { text-align:center; margin-bottom:20px; }
+    label { font-size:15px; }
+    input { width:100%; padding:8px; border:1px solid #ccc; border-radius:5px; margin-bottom:15px; }
+    button { width:100%; padding:10px; background:#0066ff; border:none; border-radius:5px; color:white; font-size:16px; cursor:pointer; }
+    button:hover { background:#004dcc; }
+    .resultado { margin-top:15px; font-size:17px; text-align:center; font-weight:bold; }
+</style>
+</head>
+<body>
+
+<div class="box">
+    <h2>Calcular IMC</h2>
+
+    <label>Peso (kg)</label>
+    <input type="number" id="peso">
+
+    <label>Altura (m)</label>
+    <input type="number" id="altura" step="0.01">
+
+    <button onclick="calcular()">Calcular IMC</button>
+
+    <div class="resultado" id="res"></div>
+</div>
+
+<script>
+function calcular() {
+    var p = Number(document.getElementById('peso').value)
+    var a = Number(document.getElementById('altura').value)
+    if (p == 0 || a == 0) {
+        document.getElementById('res').innerHTML = 'Digite valores válidos'
+        return
+    }
+    var imc = p / (a * a)
+    document.getElementById('res').innerHTML = 'IMC: ' + imc.toFixed(2)
+}
+</script>
+
+</body>
+</html>
