@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Robotron</title>
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+
+<style>
+    body {
+        margin: 0;
+        height: 100vh;
+        background: url("img/fundo.png") no-repeat center center fixed;
+        background-size: cover;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: Arial, sans-serif;
+    }
+
+    .container {
+        background: rgba(255, 255, 255, 0.85);
+        padding: 20px;
+        border-radius: 15px;
+        box-shadow: 0 0 15px rgba(0,0,0,0.3);
+        text-align: center;
+        max-width: 900px;
+    }
+
+    .linha {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 25px;
+    }
+
+    #robotron {
+        width: 300px;
+    }
+
+    #estrutura {
+        width: 250px;
+    }
+
+    .btns {
+        margin-top: 20px;
+    }
+
+    button {
+        padding: 10px 20px;
+        font-size: 22px;
+        border: none;
+        background: #0066ff;
+        color: white;
+        border-radius: 8px;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background: #004ecc;
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Robotron</h1>
+
+    <div class="linha">
+        <img id="robotron" src="img/robotron-vermelho.png">
+        <img id="estrutura" src="img/estrutura.png">
+    </div>
+
+    <div class="btns">
+        <button id="prev">&lt;&lt;</button>
+        <button id="next">&gt;&gt;</button>
+    </div>
+</div>
+
+<script>
+    const imagens = [
+        "img/robotron-vermelho.png",
+        "img/robotron-preto.png",
+        "img/robotron-rosa.png",
+        "img/robotron-azul.png",
+        "img/robotron-amarelo.png"
+    ];
+
+    let index = 0;
+    const img = document.getElementById("robotron");
+    const prev = document.getElementById("prev");
+    const next = document.getElementById("next");
+
+    function atualizar() {
+        img.src = imagens[index];
+    }
+
+    prev.onclick = () => {
+        index = (index - 1 + imagens.length) % imagens.length;
+        atualizar();
+    };
+
+    next.onclick = () => {
+        index = (index + 1) % imagens.length;
+        atualizar();
+    };
+</script>
+
+</body>
+</html>
