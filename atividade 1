@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Separar Nome e Sobrenome</title>
+</head>
+<body>
+
+    <h2>Separar Nome e Sobrenome</h2>
+
+    <label>Nome completo:</label><br>
+    <input type="text" id="nomeCompleto">
+    <button onclick="separar()">>></button>
+
+    <br><br>
+
+    <label>Nome:</label><br>
+    <input type="text" id="nome">
+
+    <br><br>
+
+    <label>Sobrenome:</label><br>
+    <input type="text" id="sobrenome">
+
+    <script>
+        function separar() {
+            let nomeC = document.getElementById("nomeCompleto").value.trim();
+            let partes = nomeC.split(" ");
+            if (partes.length < 2) {
+                alert("Digite pelo menos nome e sobrenome!");
+                return;
+            }
+            document.getElementById("nome").value = partes[0];
+            document.getElementById("sobrenome").value = partes.slice(1).join(" ");
+        }
+    </script>
+
+</body>
+</html>
