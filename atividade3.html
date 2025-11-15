@@ -79,5 +79,22 @@
         "img/robotron-rosa.png",
         "img/robotron-azul.png",
         "img/robotron-branco.png",
-        "i
+        "img/robotron-amarelo.png"   // novo!
+    ];
 
+    let index = 0;
+    const img = document.getElementById("robotron");
+
+    document.getElementById("prev").onclick = () => {
+        index = (index - 1 + imagens.length) % imagens.length;
+        img.src = imagens[index];
+    };
+
+    document.getElementById("next").onclick = () => {
+        index = (index + 1) % imagens.length;
+        img.src = imagens[index];
+    };
+</script>
+
+</body>
+</html>
