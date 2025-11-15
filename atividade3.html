@@ -1,100 +1,78 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Robotron</title>
-<link rel="icon" type="image/x-icon" href="favicon.ico">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Robotron</title>
 
-<style>
-    body {
-        margin: 0;
-        height: 100vh;
-        background: #e3e3e3;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-family: Arial, sans-serif;
-    }
+    <style>
+        body {
+            background-image: url("img/fundo.jpg");
+            background-size: cover;
+            background-repeat: no-repeat;
+            font-family: Arial;
+            text-align: center;
+            padding-top: 40px;
+        }
 
-    .container {
-        background: rgba(255, 255, 255, 0.90);
-        padding: 20px;
-        border-radius: 15px;
-        box-shadow: 0 0 15px rgba(0,0,0,0.3);
-        text-align: center;
-        max-width: 900px;
-    }
+        #estrutura {
+            width: 400px;
+        }
 
-    .painel {
-        width: 520px;
-        height: 350px;
-        background: url("img/estrutura.png") no-repeat center center;
-        background-size: contain;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin: 0 auto;
-    }
+        #robotron {
+            width: 250px;
+            margin-top: -260px; 
+            position: relative;
+        }
 
-    #robotron {
-        width: 260px;
-    }
-
-    button {
-        padding: 10px 20px;
-        font-size: 22px;
-        border: none;
-        background: #0066ff;
-        color: white;
-        border-radius: 8px;
-        cursor: pointer;
-        margin: 10px;
-    }
-
-    button:hover {
-        background: #004ecc;
-    }
-</style>
+        button {
+            padding: 10px 20px;
+            margin: 10px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
 
-<div class="container">
-    <h1>Robotron</h1>
+    <h1>ROBOTRON</h1
+    <img id="estrutura" src="img/estrutura.png">
+    <img id="robotron" src="img/robotron.png">
+    <br><br>
 
-    <div class="painel">
-        <img id="robotron" src="img/robotron-vermelho.png">
-    </div>
+    <button onclick="voltar()"><<</button>
+    <button onclick="avancar()">>></button>
 
-    <div>
-        <button id="prev">&lt;&lt;</button>
-        <button id="next">&gt;&gt;</button>
-    </div>
-</div>
+    <script>
+        const cores = [
+            "robotron.png",
+            "robotron-vermelho.png",
+            "robotron-preto.png",
+            "robotron-rosa.png",
+            "robotron-azul.png",
+            "robotron-branco.png",
+            "robotron-amarelo.png"  // novo amarelo
+        ];
 
-<script>
-    const imagens = [
-        "img/robotron-vermelho.png",
-        "img/robotron-preto.png",
-        "img/robotron-rosa.png",
-        "img/robotron-azul.png",
-        "img/robotron-branco.png",
-        "img/robotron-amarelo.png"   // novo!
-    ];
+        let index = 0;
 
-    let index = 0;
-    const img = document.getElementById("robotron");
+        function atualizar() {
+            document.getElementById("robotron").src = "img/" + cores[index];
+        }
 
-    document.getElementById("prev").onclick = () => {
-        index = (index - 1 + imagens.length) % imagens.length;
-        img.src = imagens[index];
-    };
+        function avancar() {
+            index++;
+            if (index >= cores.length) index = 0;
+            atualizar();
+        }
 
-    document.getElementById("next").onclick = () => {
-        index = (index + 1) % imagens.length;
-        img.src = imagens[index];
-    };
-</script>
+        function voltar() {
+            index--;
+            if (index < 0) index = cores.length - 1;
+            atualizar();
+        }
+    </script>
 
 </body>
 </html>
+
