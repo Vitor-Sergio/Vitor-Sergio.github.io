@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Robotron</title>
+
+<style>
+    body {
+        margin: 0;
+        background-image: url("img/fundo.jpg");
+        background-size: cover;
+        background-repeat: no-repeat;
+        font-family: Arial;
+        padding: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 50px;
+    }
+
+    .robot-area {
+        text-align: center;
+    }
+
+    .robot-area img {
+        width: 260px;
+    }
+
+    .controls {
+        margin-top: 10px;
+    }
+
+    .controls button {
+        padding: 10px 20px;
+        font-size: 20px;
+        cursor: pointer;
+    }
+
+    .tabela {
+        width: 350px;
+        padding: 20px;
+        background-color: #0d1b2a;
+        border: 3px solid #4cc9f0;
+        border-radius: 10px;
+        color: white;
+        font-size: 20px;
+    }
+
+    .item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 20px 0;
+    }
+
+    .botoes {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 22px;
+    }
+
+    .botoes button {
+        width: 35px;
+        height: 35px;
+        font-size: 24px;
+        cursor: pointer;
+    }
+
+    .valor {
+        width: 40px;
+        text-align: center;
+        font-size: 22px;
+    }
+</style>
+</head>
+<body>
+
+<div class="robot-area">
+    <img id="robotron" src="img/robotron-vermelho.png">
+
+    <div class="controls">
+        <button onclick="voltar()">&lt;&lt;</button>
+        <button onclick="avancar()">&gt;&gt;</button>
+    </div>
+</div>
+
+<div class="tabela">
+    <div class="item">
+        <span>BRAÇOS</span>
+        <div class="botoes">
+            <button onclick="mudar('bracos', -1)">-</button>
+            <span id="bracos" class="valor">0</span>
+            <button onclick="mudar('bracos', 1)">+</button>
+        </div>
+    </div>
+
+    <div class="item">
+        <span>BLINDAGEM</span>
+        <div class="botoes">
+            <button onclick="mudar('blindagem', -1)">-</button>
+            <span id="blindagem" class="valor">0</span>
+            <button onclick="mudar('blindagem', 1)">+</button>
+        </div>
+    </div>
+
+    <div class="item">
+        <span>NÚCLEOS</span>
+        <div class="botoes">
+            <button onclick="mudar('nucleos', -1)">-</button>
+            <span id="nucleos" class="valor">0</span>
+            <button onclick="mudar('nucleos', 1)">+</button>
+        </div>
+    </div>
+
+    <div class="item">
+        <span>PERNAS</span>
+        <div class="botoes">
+            <button onclick="mudar('pernas', -1)">-</button>
+            <span id="pernas" class="valor">0</span>
+            <button onclick="mudar('pernas', 1)">+</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    const cores = [
+        "robotron-vermelho.png",
+        "robotron-preto.png",
+        "robotron-rosa.png",
+        "robotron-azul.png",
+        "robotron-branco.png",
+        "robotron-amarelo.png"
+    ];
+
+    let index = 0;
+
+    function atualizar() {
+        document.getElementById("robotron").src = "img/" + cores[index];
+    }
+
+    function avancar() {
+        index++;
+        if (index >= cores.length) index = 0;
+        atualizar();
+    }
+
+    function voltar() {
+        index--;
+        if (index < 0) index = cores.length - 1;
+        atualizar();
+    }
+
+    function mudar(id, valor) {
+        let elemento = document.getElementById(id);
+        let num = parseInt(elemento.textContent);
+
+        num += valor;
+        if (num < 0) num = 0;
+        if (num > 10) num = 10;
+
+        elemento.textContent = num;
+    }
+</script>
+
+</body>
+</html>
