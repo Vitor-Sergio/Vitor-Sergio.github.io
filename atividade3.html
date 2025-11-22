@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -7,165 +6,254 @@
 <title>Robotron</title>
 
 <style>
-    body {
-        margin: 0;
-        background-image: url("img/fundo.jpg");
-        background-size: cover;
-        background-repeat: no-repeat;
-        font-family: Arial;
-        padding: 40px;
-        display: flex;
-        justify-content: center;
-        align-items: flex-start;
-        gap: 50px;
+:root {
+    --main-cinza: #CCCCCC;
+    --main-branco: #FFFFFF;
+    --main-preto: #000000;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background: url(img/fundo.jpg);
+    background-position: center center;
+    background-size: cover;
+    padding: 0;
+    margin: 0;
+    font-weight: 300;
+    font-family: 'Teko', sans-serif;
+}
+
+main {
+    width: 80vw;
+    height: 80vh;
+    margin: 10vh 8vw 10vh 12vw;
+    display: flex;
+    gap: 1vw;
+}
+
+.robotron {
+    background: url(img/estrutura.png) no-repeat;
+    background-position: center center;
+    margin: 0;
+    flex-basis: 40%;
+    position: relative;
+}
+
+.robo {
+    height: 110%;
+    z-index: 1;
+    position: absolute;
+    left: -20%;
+    top: -5%;
+}
+
+.titulo {
+    transform: rotate(180deg);
+    font-weight: 500;
+    font-size: 130px;
+    position: absolute;
+    bottom: 7rem;
+    left: -3rem;
+    line-height: 0.8;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    color: rgba(255,255,255,0.8)
+}
+
+.box {
+    background: rgba(0,0,0,0.6);
+    clip-path: polygon(calc(100% - 30px) 0, 100% 30px, 100% calc(100% - 30px), calc(100% - 30px) 100%, 30px 100%, 0 calc(100% - 30px), 0 30px, 30px 0);
+    border-left: 5px solid var(--main-cinza);
+    height: 80%;
+}
+
+.equipamentos {
+    flex-basis: 32%;
+}
+
+.montador {
+    height: 100%;;
+}
+
+.montador-conteudo {
+    padding: 2em 10%;
+}
+
+.peca {
+    padding: 1em 0;
+}
+
+.peca-titulo {
+    color: var(--main-branco);
+    text-transform: uppercase;
+    font-size: 2.5em;
+}
+
+.linha {
+    border-color: var(--main-cinza);
+}
+
+.estatisticas {
+    flex-basis: 23%;
+    padding: 2em 2em 0;
+}
+
+.estatistica {
+    color: var(--main-branco);
+    display: flex;
+    align-items: flex-start;
+    height: 25%;
+}
+
+.estatistica-titulo {
+    font-size: 1.5em;
+    border-bottom: 1px solid var(--main-cinza);
+    flex-basis: 40%;
+    text-transform: uppercase;
+    order: 1
+}
+
+.estatistica-valor {
+    flex-basis: 60%;
+    position: relative;
+    margin: -10px 0 0;
+    order: 2;
+}
+
+.estatistica-valor::after {
+    content: "";
+    display: block;
+    padding-bottom: 100%;
+    border: 1px solid var(--main-cinza);
+    border-radius: 50%;
+}
+
+.estatistica-numero {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-46%);
+    width: 100%;
+    line-height: 100%;
+    text-align: center;
+    font-size: 3em;
+    margin: 0;
+}
+
+.estatistica:nth-child(2n) .estatistica-titulo {
+    order: 2;
+    text-align: right;
+}
+
+.estatistica:nth-child(2n) .estatistica-valor {
+    order: 1;
+    flex-basis: 35%;
+    margin: 10px 0 0;
+}
+
+.troca-cor {
+    position: absolute;
+    bottom: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 20px;
+}
+
+.botao-cor {
+    padding: 10px 20px;
+    font-size: 2rem;
+    cursor: pointer;
+    background: var(--main-preto);
+    color: var(--main-branco);
+    border: 3px solid var(--main-branco);
+}
+
+.botao-cor:hover {
+    background: var(--main-branco);
+    color: var(--main-preto);
+}
+
+@media screen and (max-width: 1600px) {
+    body { 
+        font-size: 14px;
+    }
+    main {
+        width: 90vw;
+        height: 80vh;
+        margin: 5vh auto;
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    body { 
+        font-size: 13px;
     }
 
-    .robot-area {
-        text-align: center;
+    main {
+        width: 96vw;
+        height: 80vh;
+        margin: 10vh auto;
     }
-
-    .robot-area img {
-        width: 260px;
-    }
-
-    .controls {
-        margin-top: 10px;
-    }
-
-    .controls button {
-        padding: 10px 20px;
-        font-size: 20px;
-        cursor: pointer;
-    }
-
-    .tabela {
-        width: 350px;
-        padding: 20px;
-        background-color: #0d1b2a;
-        border: 3px solid #4cc9f0;
-        border-radius: 10px;
-        color: white;
-        font-size: 20px;
-    }
-
-    .item {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin: 20px 0;
-    }
-
-    .botoes {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        font-size: 22px;
-    }
-
-    .botoes button {
-        width: 35px;
-        height: 35px;
-        font-size: 24px;
-        cursor: pointer;
-    }
-
-    .valor {
-        width: 40px;
-        text-align: center;
-        font-size: 22px;
-    }
+}
 </style>
 </head>
+
 <body>
 
-<div class="robot-area">
-    <img id="robotron" src="img/robotron-vermelho.png">
+<main>
+    <section class="robotron">
+        <h1 class="titulo">ROBOTRON</h1>
+        <img class="robo" id="robotron" src="img/robotron-vermelho.png">
 
-    <div class="controls">
-        <button onclick="voltar()">&lt;&lt;</button>
-        <button onclick="avancar()">&gt;&gt;</button>
-    </div>
-</div>
-
-<div class="tabela">
-    <div class="item">
-        <span>BRAÇOS</span>
-        <div class="botoes">
-            <button onclick="mudar('bracos', -1)">-</button>
-            <span id="bracos" class="valor">0</span>
-            <button onclick="mudar('bracos', 1)">+</button>
+        <div class="troca-cor">
+            <button class="botao-cor" onclick="voltar()">&lt;&lt;</button>
+            <button class="botao-cor" onclick="avancar()">&gt;&gt;</button>
         </div>
-    </div>
+    </section>
 
-    <div class="item">
-        <span>BLINDAGEM</span>
-        <div class="botoes">
-            <button onclick="mudar('blindagem', -1)">-</button>
-            <span id="blindagem" class="valor">0</span>
-            <button onclick="mudar('blindagem', 1)">+</button>
+    <section class="equipamentos">
+        <div class="box">
+            <div class="montador">
+                <div class="montador-conteudo">
+                </div>
+            </div>
         </div>
-    </div>
+    </section>
 
-    <div class="item">
-        <span>NÚCLEOS</span>
-        <div class="botoes">
-            <button onclick="mudar('nucleos', -1)">-</button>
-            <span id="nucleos" class="valor">0</span>
-            <button onclick="mudar('nucleos', 1)">+</button>
-        </div>
-    </div>
-
-    <div class="item">
-        <span>PERNAS</span>
-        <div class="botoes">
-            <button onclick="mudar('pernas', -1)">-</button>
-            <span id="pernas" class="valor">0</span>
-            <button onclick="mudar('pernas', 1)">+</button>
-        </div>
-    </div>
-</div>
+    <section class="estatisticas">
+    </section>
+</main>
 
 <script>
-    const cores = [
-        "robotron-vermelho.png",
-        "robotron-preto.png",
-        "robotron-rosa.png",
-        "robotron-azul.png",
-        "robotron-branco.png",
-        "robotron-amarelo.png"
-    ];
+const cores = [
+    "robotron-vermelho.png",
+    "robotron-preto.png",
+    "robotron-rosa.png",
+    "robotron-azul.png",
+    "robotron-branco.png",
+    "robotron-amarelo.png"
+];
 
-    let index = 0;
+let index = 0;
 
-    function atualizar() {
-        document.getElementById("robotron").src = "img/" + cores[index];
-    }
+function atualizar() {
+    document.getElementById("robotron").src = "img/" + cores[index];
+}
 
-    function avancar() {
-        index++;
-        if (index >= cores.length) index = 0;
-        atualizar();
-    }
+function avancar() {
+    if (index < cores.length - 1) index++;
+    atualizar();
+}
 
-    function voltar() {
-        index--;
-        if (index < 0) index = cores.length - 1;
-        atualizar();
-    }
-
-    function mudar(id, valor) {
-        let elemento = document.getElementById(id);
-        let num = parseInt(elemento.textContent);
-
-        num += valor;
-        if (num < 0) num = 0;
-        if (num > 10) num = 10;
-
-        elemento.textContent = num;
-    }
+function voltar() {
+    if (index > 0) index--;
+    atualizar();
+}
 </script>
 
 </body>
 </html>
-
 
