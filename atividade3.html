@@ -1,259 +1,166 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0" />
 <title>Robotron</title>
-
 <style>
-:root {
-    --main-cinza: #CCCCCC;
-    --main-branco: #FFFFFF;
-    --main-preto: #000000;
+:root{
+    --main-cinza:#CCCCCC;
+    --main-branco:#FFFFFF;
+    --main-preto:#000000;
 }
-
-* {
-    box-sizing: border-box;
+*{box-sizing:border-box}
+body{
+    background:url(img/fundo.jpg) center center / cover no-repeat;
+    margin:0;
+    padding:0;
+    font-weight:300;
+    font-family:'Teko', sans-serif;
 }
-
-body {
-    background: url(img/fundo.jpg);
-    background-position: center center;
-    background-size: cover;
-    padding: 0;
-    margin: 0;
-    font-weight: 300;
-    font-family: 'Teko', sans-serif;
+main{
+    width:80vw;
+    height:80vh;
+    margin:10vh 8vw 10vh 12vw;
+    display:flex;
+    gap:1vw;
 }
-
-main {
-    width: 80vw;
-    height: 80vh;
-    margin: 10vh 8vw 10vh 12vw;
-    display: flex;
-    gap: 1vw;
+.robotron{
+    flex-basis:40%;
+    position:relative;
+    background:url(img/estrutura.png) no-repeat center center;
+    background-size:contain;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:visible;
+    min-height:300px;
 }
-
-.robotron {
-    background: url(img/estrutura.png) no-repeat;
-    background-position: center center;
-    margin: 0;
-    flex-basis: 40%;
-    position: relative;
+.robo{
+    width:65%;
+    max-width:320px;
+    height:auto;
+    z-index:2;
+    position:relative;
+    top:0;
+    left:0;
+    transition: transform .25s ease, opacity .25s ease;
 }
-
-.robo {
-    height: 110%;
-    z-index: 1;
-    position: absolute;
-    left: -20%;
-    top: -5%;
+.titulo{
+    transform:rotate(180deg);
+    font-weight:500;
+    font-size:130px;
+    position:absolute;
+    bottom:7rem;
+    left:-3rem;
+    line-height:0.8;
+    writing-mode:vertical-rl;
+    text-orientation:mixed;
+    color:rgba(255,255,255,0.8)
 }
-
-.titulo {
-    transform: rotate(180deg);
-    font-weight: 500;
-    font-size: 130px;
-    position: absolute;
-    bottom: 7rem;
-    left: -3rem;
-    line-height: 0.8;
-    writing-mode: vertical-rl;
-    text-orientation: mixed;
-    color: rgba(255,255,255,0.8)
+.box{
+    background:rgba(0,0,0,0.6);
+    clip-path:polygon(calc(100% - 30px) 0,100% 30px,100% calc(100% - 30px),calc(100% - 30px) 100%,30px 100%,0 calc(100% - 30px),0 30px,30px 0);
+    border-left:5px solid var(--main-cinza);
+    height:80%;
 }
+.equipamentos{flex-basis:32%}
+.montador{height:100%}
+.montador-conteudo{padding:2em 10%}
+.peca{padding:1em 0}
+.peca-titulo{color:var(--main-branco);text-transform:uppercase;font-size:2.5em}
+.linha{border-color:var(--main-cinza)}
+.estatisticas{flex-basis:23%;padding:2em 2em 0}
+.estatistica{color:var(--main-branco);display:flex;align-items:flex-start;height:25%}
+.estatistica-titulo{font-size:1.5em;border-bottom:1px solid var(--main-cinza);flex-basis:40%;text-transform:uppercase;order:1}
+.estatistica-valor{flex-basis:60%;position:relative;margin:-10px 0 0;order:2}
+.estatistica-valor::after{content:"";display:block;padding-bottom:100%;border:1px solid var(--main-cinza);border-radius:50%}
+.estatistica-numero{position:absolute;top:50%;transform:translateY(-46%);width:100%;line-height:100%;text-align:center;font-size:3em;margin:0}
+.estatistica:nth-child(2n) .estatistica-titulo{order:2;text-align:right}
+.estatistica:nth-child(2n) .estatistica-valor{order:1;flex-basis:35%;margin:10px 0 0}
 
-.box {
-    background: rgba(0,0,0,0.6);
-    clip-path: polygon(calc(100% - 30px) 0, 100% 30px, 100% calc(100% - 30px), calc(100% - 30px) 100%, 30px 100%, 0 calc(100% - 30px), 0 30px, 30px 0);
-    border-left: 5px solid var(--main-cinza);
-    height: 80%;
+.troca-cor{
+    position:absolute;
+    bottom:10px;
+    left:50%;
+    transform:translateX(-50%);
+    display:flex;
+    gap:14px;
+    z-index:5;
+    pointer-events:auto;
 }
-
-.equipamentos {
-    flex-basis: 32%;
+.botao-cor{
+    padding:8px 14px;
+    font-size:1.6rem;
+    cursor:pointer;
+    background:var(--main-preto);
+    color:var(--main-branco);
+    border:3px solid var(--main-branco);
+    border-radius:6px;
+    user-select:none;
 }
+.botao-cor:hover{background:var(--main-branco);color:var(--main-preto)}
 
-.montador {
-    height: 100%;;
+@media screen and (max-width:1600px){
+    body{font-size:14px}
+    main{width:90vw;height:80vh;margin:5vh auto}
 }
-
-.montador-conteudo {
-    padding: 2em 10%;
-}
-
-.peca {
-    padding: 1em 0;
-}
-
-.peca-titulo {
-    color: var(--main-branco);
-    text-transform: uppercase;
-    font-size: 2.5em;
-}
-
-.linha {
-    border-color: var(--main-cinza);
-}
-
-.estatisticas {
-    flex-basis: 23%;
-    padding: 2em 2em 0;
-}
-
-.estatistica {
-    color: var(--main-branco);
-    display: flex;
-    align-items: flex-start;
-    height: 25%;
-}
-
-.estatistica-titulo {
-    font-size: 1.5em;
-    border-bottom: 1px solid var(--main-cinza);
-    flex-basis: 40%;
-    text-transform: uppercase;
-    order: 1
-}
-
-.estatistica-valor {
-    flex-basis: 60%;
-    position: relative;
-    margin: -10px 0 0;
-    order: 2;
-}
-
-.estatistica-valor::after {
-    content: "";
-    display: block;
-    padding-bottom: 100%;
-    border: 1px solid var(--main-cinza);
-    border-radius: 50%;
-}
-
-.estatistica-numero {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-46%);
-    width: 100%;
-    line-height: 100%;
-    text-align: center;
-    font-size: 3em;
-    margin: 0;
-}
-
-.estatistica:nth-child(2n) .estatistica-titulo {
-    order: 2;
-    text-align: right;
-}
-
-.estatistica:nth-child(2n) .estatistica-valor {
-    order: 1;
-    flex-basis: 35%;
-    margin: 10px 0 0;
-}
-
-.troca-cor {
-    position: absolute;
-    bottom: -40px;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    gap: 20px;
-}
-
-.botao-cor {
-    padding: 10px 20px;
-    font-size: 2rem;
-    cursor: pointer;
-    background: var(--main-preto);
-    color: var(--main-branco);
-    border: 3px solid var(--main-branco);
-}
-
-.botao-cor:hover {
-    background: var(--main-branco);
-    color: var(--main-preto);
-}
-
-@media screen and (max-width: 1600px) {
-    body { 
-        font-size: 14px;
-    }
-    main {
-        width: 90vw;
-        height: 80vh;
-        margin: 5vh auto;
-    }
-}
-
-@media screen and (max-width: 1200px) {
-    body { 
-        font-size: 13px;
-    }
-
-    main {
-        width: 96vw;
-        height: 80vh;
-        margin: 10vh auto;
-    }
+@media screen and (max-width:1200px){
+    body{font-size:13px}
+    main{width:96vw;height:80vh;margin:10vh auto}
+    .robo{max-width:260px}
+    .titulo{font-size:90px}
 }
 </style>
 </head>
-
 <body>
-
 <main>
     <section class="robotron">
         <h1 class="titulo">ROBOTRON</h1>
-        <img class="robo" id="robotron" src="img/robotron-vermelho.png">
-
+        <img id="robotron" class="robo" src="img/robotron-vermelho.png" alt="robotron">
         <div class="troca-cor">
-            <button class="botao-cor" onclick="voltar()">&lt;&lt;</button>
-            <button class="botao-cor" onclick="avancar()">&gt;&gt;</button>
+            <button id="btn-voltar" class="botao-cor">&lt;&lt;</button>
+            <button id="btn-avancar" class="botao-cor">&gt;&gt;</button>
         </div>
     </section>
 
     <section class="equipamentos">
         <div class="box">
             <div class="montador">
-                <div class="montador-conteudo">
-                </div>
+                <div class="montador-conteudo"></div>
             </div>
         </div>
     </section>
 
-    <section class="estatisticas">
-    </section>
+    <section class="estatisticas"></section>
 </main>
 
 <script>
-const cores = [
-    "robotron-vermelho.png",
-    "robotron-preto.png",
-    "robotron-rosa.png",
-    "robotron-azul.png",
-    "robotron-branco.png",
-    "robotron-amarelo.png"
-];
-
-let index = 0;
-
-function atualizar() {
-    document.getElementById("robotron").src = "img/" + cores[index];
+const cores=["robotron-vermelho.png","robotron-preto.png","robotron-rosa.png","robotron-azul.png","robotron-branco.png","robotron-amarelo.png"];
+let index=0;
+const imgRobo=document.getElementById("robotron");
+const btnAv=document.getElementById("btn-avancar");
+const btnVol=document.getElementById("btn-voltar");
+function atualizar(){
+    imgRobo.style.opacity="0.2";
+    setTimeout(()=>{
+        imgRobo.src="img/"+cores[index];
+        imgRobo.style.opacity="1";
+    },120);
 }
-
-function avancar() {
-    if (index < cores.length - 1) index++;
+function avancar(){
+    if(index<cores.length-1) index++;
     atualizar();
 }
-
-function voltar() {
-    if (index > 0) index--;
+function voltar(){
+    if(index>0) index--;
     atualizar();
 }
+btnAv.addEventListener("click",avancar);
+btnVol.addEventListener("click",voltar);
+document.addEventListener("DOMContentLoaded",()=>{atualizar()});
 </script>
-
 </body>
 </html>
 
