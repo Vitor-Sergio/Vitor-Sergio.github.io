@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pré-Matrícula</title>
+
+<style>
+    body {
+        font-family: Arial;
+        padding: 20px;
+        background: #f2f2f2;
+    }
+    form {
+        background: white;
+        padding: 20px;
+        max-width: 500px;
+        margin: auto;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    label { display: block; margin-top: 10px; }
+    input, select { width: 100%; padding: 8px; margin-top: 5px; }
+    .grupo { margin-top: 15px; }
+    .atividades label { display: block; }
+    button {
+        margin-top: 20px;
+        padding: 12px;
+        width: 48%;
+        cursor: pointer;
+    }
+    .erro {
+        color: red;
+        margin-top: 10px;
+        font-weight: bold;
+    }
+    .sucesso {
+        color: green;
+        margin-top: 10px;
+        font-weight: bold;
+    }
+</style>
+
+</head>
+<body>
+
+<form id="form">
+    <h2>Formulário de Pré-Matrícula</h2>
+
+    <label>Nome do Aluno:</label>
+    <input type="text" id="aluno">
+
+    <label>Data de Nascimento (dd/mm/aaaa):</label>
+    <input type="text" id="nascimento">
+
+    <label>Nome da Mãe:</label>
+    <input type="text" id="mae">
+
+    <label>Nome do Pai:</label>
+    <input type="text" id="pai">
+
+    <label>DDD:</label>
+    <input type="text" id="ddd">
+
+    <label>Telefone:</label>
+    <input type="text" id="tel">
+
+    <label>E-mail:</label>
+    <input type="text" id="email">
+
+    <div class="grupo">
+        <label>Série:</label>
+        <select id="serie">
+            <option value="">Selecione</option>
+            <option>Pré-escolar</option>
+            <option>Fundamental 1</option>
+            <option>Fundamental 2</option>
+            <option>Médio</option>
+        </select>
+    </div>
+
+    <div class="grupo">
+        <label>Turno:</label>
+        <label><input type="radio" name="turno" value="Manhã"> Manhã</label>
+        <label><input type="radio" name="turno" value="Tarde"> Tarde</label>
+    </div>
+
+    <div class="grupo atividades">
+        <label>Atividades Extracurriculares (máx. 3):</label>
+        <label><input type="checkbox" class="atividade" value="Informática"> Informática</label>
+        <label><input type="checkbox" class="atividade" value="Música"> Música</label>
+        <label><input type="checkbox" class="atividade" value="Ballet"> Ballet</label>
+        <label><input type="checkbox" class="atividade" value="Pintura"> Pintura</label>
+        <label><input type="checkbox" class="atividade" value="Judô"> Judô</label>
+        <label><input type="checkbox" class="atividade" value="Futebol"> Futebol</label>
+    </div>
+
+    <div style="display:flex; justify-content:space-between;">
+        <button type="button" onclick="enviar()">Enviar</button>
+        <button type="reset">Limpar</button>
+    </div>
+
+    <p id="mensagem"></p>
+</form>
+
+
+<script>
+const dddsValidos = ["11","12","13","14","15","16","17","18","19","21","22","24","27","28","31","32","33","34","35","37","38","41","42","43","44","45","46","47","48","49","51","53","54","55","61","62","63","64","65","66","67","68","69","71","73","74","75","77","79","81","82","83","84","85","86","87","88","89","91","92","93","94","95","96","97","98","99"];
+
+function validarData(data) {
+    const partes = data.split("/");
+    if (partes.length !== 3) return false;
+    const d = parseInt(partes[0]);
+    const m = parseInt(partes[1]);
+    const a = parseInt(partes[2]);
+    const dataObj = new Date(a, m - 1, d);
+    return dataObj.getDate() === d && dataObj.getMonth() === m - 1 && dataObj.getFullYear() === a;
+}
+
+function enviar() {
+    const msg = document.getElementById("mensagem");
+    msg.className = "";
+    msg.innerHTML = "";
+
+    const aluno = document.getElementById("aluno").value.trim();
+    const nasc = document.getElementById("nascimento").value.trim();
+    const mae = document.getElementById("mae").value.trim();
+    const pai = document.getElementById("pai").value.trim();
+    const ddd = document.getElementById("ddd").value.trim();
+    const tel = document.getElementById("tel").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const serie = document.getElementById("serie").value;
+    const turno = document.querySelector("input[name='turno']:checked");
+    const atividades = document.querySelectorAll(".atividade:checked");
+
+    if (!aluno || !nasc || !mae || !pai || !ddd || !tel || !email || !serie || !turno) {
+        msg.className = "erro";
+        msg.innerHTML = "Preencha todos os campos obrigatórios.";
+        return;
+    }
+
+    if (!validarData(nasc)) {
+        msg.className = "erro";
+        msg.innerHTML = "Data de nascimento inválida.";
+        return;
+    }
+
+    if (!email.includes("@") || !email.includes(".")) {
+        msg.className = "erro";
+        msg.innerHTML = "E-mail inválido.";
+        return;
+    }
+
+    if (!dddsValidos.includes(ddd)) {
+        msg.className = "erro";
+        msg.innerHTML = "DDD inválido.";
+        return;
+    }
+
+    if (atividades.length > 3) {
+        msg.className = "erro";
+        msg.innerHTML = "Selecione no máximo 3 atividades.";
+        return;
+    }
+
+    msg.className = "sucesso";
+    msg.innerHTML = "Cadastro realizado com sucesso!";
+}
+</script>
+
+</body>
+</html>
