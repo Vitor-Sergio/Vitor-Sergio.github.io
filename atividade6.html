@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Gastos - Cálculo Simples</title>
+<style>
+    body{font-family:Arial;margin:40px auto;width:420px}
+    label{display:block;margin-top:10px}
+    input,button{width:100%;padding:8px;margin-top:6px;box-sizing:border-box}
+    table{width:100%;border-collapse:collapse;margin-top:15px}
+    th,td{border:1px solid #444;padding:6px}
+    .resumo{background:#f7f7f7;border:1px solid #ccc;padding:12px;margin-top:15px}
+</style>
+</head>
+<body>
+
+<h2>Controle de Gastos</h2>
+
+<label>Categoria:</label>
+<input id="categoria" type="text">
+
+<label>Valor (R$):</label>
+<input id="valor" type="number" step="0.01">
+
+<label>Data:</label>
+<input id="data" type="date">
+
+<button id="add">Adicionar Gasto</button>
+
+<table id="tabela">
+    <thead>
+        <tr><th>Categoria</th><th>Data</th><th>Valor (R$)</th></tr>
+    </thead>
+    <tbody></tbody>
+</table>
+
+<button id="calcular" style="margin-top:10px">Calcular Totais</button>
+
+<div class="resumo">
+    <p id="totalGeral">Total Geral: R$ 0,00</p>
+    <p id="mesAntigo">Mês mais antigo: R$ 0,00</p>
+    <p id="mesRecente">Mês mais recente: R$ 0,00</p>
+    <p id="totalMercado">Total Mercado: R$ 0,00</p>
+</div>
+
+<script>
+    const gastos = [];
+
+    function adicionar(){
+        const cat = document.getElementById("categoria").value.trim();
+        const val = parseFloat(document.getElementById("valor").value);
+        const data = document.getElementById("data").value;
+
+        if(!cat || isNaN(val) || val <= 0 || !data){
+            alert("Preencha todos os campos corretamente!");
+            return;
+        }
+
+        gastos.push({categoria: cat, valor: val, data: data});
+
+        const tr = document.createElement("tr");
+        tr.innerHTML = `<td>${cat}</td><td>${data}</td><td>${val.toFixed(2)}</td>`;
+        document.querySelector("#tabela tbody").appendChild(tr);
+
+        document.getElementById("categoria").value = "";
+        document.getElementById("valor").value = "";
+        document.getElementById("data").value = "";
+    }
+
+    function calcular(){
+        let total = 0, mercado = 0;
+        const meses = {};
+
+        gastos.forEach(g => {
+            total += g.valor;
+            if(g.categoria.toLowerCase() === "mercado") mercado += g.valor;
+
+            const mes = g.data.split("-")[1];
+            if(!meses[mes]) meses[mes] = 0;
+            meses[mes] += g.valor;
+        });
+
+        const listaMeses = Object.keys(meses).sort();
+        const mesAntigo = listaMeses[0] || "00";
+        const mesRecente = listaMeses[listaMeses.length - 1] || "00";
+
+        document.getElementById("totalGeral").textContent = "Total Geral: R$ " + total.toFixed(2);
+        document.getElementById("mesAntigo").textContent = "Mês mais antigo (" + mesAntigo + "): R$ " + (meses[mesAntigo] || 0).toFixed(2);
+        document.getElementById("mesRecente").textContent = "Mês mais recente (" + mesRecente + "): R$ " + (meses[mesRecente] || 0).toFixed(2);
+        document.getElementById("totalMercado").textContent = "Total Mercado: R$ " + mercado.toFixed(2);
+    }
+
+    document.getElementById("add").onclick = adicionar;
+    document.getElementById("calcular").onclick = calcular;
+</script>
+
+</body>
+</html>
