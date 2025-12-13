@@ -23,8 +23,9 @@
     <div class="collapse navbar-collapse" id="menu">
       <ul class="navbar-nav ms-auto">
         <li class="nav-item"><a class="nav-link" href="#inicio">Início</a></li>
-        <li class="nav-item"><a class="nav-link" href="#cardapio">Cardápio</a></li>
+        <li class="nav-item"><a class="nav-link" href="#pratos">Pratos</a></li>
         <li class="nav-item"><a class="nav-link" href="#bebidas">Bebidas</a></li>
+        <li class="nav-item"><a class="nav-link" href="#sobremesas">Sobremesas</a></li>
         <li class="nav-item"><a class="nav-link" href="#sobre">Sobre Nós</a></li>
         <li class="nav-item"><a class="nav-link" href="#reservas">Reservas</a></li>
         <li class="nav-item"><a class="nav-link" href="#galeria">Galeria</a></li>
@@ -38,23 +39,21 @@
 <section id="inicio" class="bg-light py-5 text-center">
   <div class="container">
     <h1>VerdeVita</h1>
-    <p class="lead">
-      Cucina Italiana Vegana 🌱
-    </p>
+    <p class="lead">Cucina Italiana Vegana 🌱</p>
     <p>
-      Um restaurante que une a tradição da culinária italiana com ingredientes
-      100% vegetais, promovendo saúde, sabor e sustentabilidade.
+      Um restaurante que une a tradição da culinária italiana
+      com ingredientes 100% vegetais, promovendo saúde,
+      sustentabilidade e sabor.
     </p>
   </div>
 </section>
 
-<!-- CARDÁPIO -->
-<section id="cardapio" class="py-5">
+<!-- PRATOS -->
+<section id="pratos" class="py-5">
   <div class="container">
-    <h2 class="mb-4">Cardápio</h2>
+    <h2 class="mb-4">Pratos Principais</h2>
 
     <div class="row g-4">
-
       <div class="col-md-4">
         <div class="card h-100">
           <img src="img-verdevita/bruschetta.jpg" class="card-img-top">
@@ -98,18 +97,6 @@
           </div>
         </div>
       </div>
-
-      <div class="col-md-4">
-        <div class="card h-100">
-          <img src="img-verdevita/mousse.jpg" class="card-img-top">
-          <div class="card-body">
-            <h5>Mousse Vegano</h5>
-            <p>Sobremesa cremosa sem lactose</p>
-            <strong>R$ 18,00</strong>
-          </div>
-        </div>
-      </div>
-
     </div>
   </div>
 </section>
@@ -145,69 +132,94 @@
   </div>
 </section>
 
+<!-- SOBREMESAS -->
+<section id="sobremesas" class="py-5">
+  <div class="container">
+    <h2 class="mb-4">Sobremesas Veganas</h2>
+
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="card">
+          <img src="img-verdevita/mousse.jpg" class="card-img-top">
+          <div class="card-body">
+            <h5>Mousse Vegano</h5>
+            <p>Sobremesa cremosa à base vegetal</p>
+            <strong>R$ 18,00</strong>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card">
+          <img src="img-verdevita/tiramissu.jpg" class="card-img-top">
+          <div class="card-body">
+            <h5>Tiramisù Vegano</h5>
+            <p>Clássico italiano adaptado</p>
+            <strong>R$ 22,00</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- SOBRE NÓS -->
-<section id="sobre" class="py-5">
+<section id="sobre" class="bg-light py-5">
   <div class="container">
     <h2>Sobre Nós</h2>
 
     <h5 class="mt-3">História do Restaurante</h5>
     <p>
-      O VerdeVita nasceu com o objetivo de oferecer pratos italianos clássicos
-      adaptados à culinária vegana, respeitando o meio ambiente e promovendo
-      uma alimentação saudável e consciente.
+      O VerdeVita nasceu com a missão de provar que a culinária italiana
+      pode ser sustentável, saudável e cheia de sabor, sem o uso de
+      ingredientes de origem animal.
     </p>
 
     <h5 class="mt-3">Perfil do Chef</h5>
     <p>
       O chef Lorenzo Bianchi é especialista em gastronomia vegana italiana,
-      com formação internacional e mais de 10 anos de experiência.
+      com mais de 10 anos de experiência e formação internacional.
     </p>
 
     <h5 class="mt-3">Prêmios e Reconhecimentos</h5>
     <ul>
       <li>🏆 Melhor Restaurante Vegano – 2024</li>
-      <li>⭐ Destaque Sustentável – Guia Gastronômico</li>
+      <li>⭐ Destaque em Sustentabilidade Gastronômica</li>
     </ul>
   </div>
 </section>
 
 <!-- RESERVAS -->
-<section id="reservas" class="bg-light py-5">
+<section id="reservas" class="py-5">
   <div class="container">
     <h2>Reservas</h2>
 
     <form class="row g-3 mt-3">
-      <div class="col-md-6">
-        <input class="form-control" placeholder="Nome">
-      </div>
-      <div class="col-md-6">
-        <input type="email" class="form-control" placeholder="E-mail">
-      </div>
-      <div class="col-md-4">
-        <input type="date" class="form-control">
-      </div>
-      <div class="col-md-4">
-        <input type="time" class="form-control">
-      </div>
-      <div class="col-md-4">
-        <input type="number" class="form-control" placeholder="Pessoas">
-      </div>
-      <div class="col-12">
-        <button class="btn btn-success">Reservar</button>
-      </div>
+      <div class="col-md-6"><input class="form-control" placeholder="Nome"></div>
+      <div class="col-md-6"><input type="email" class="form-control" placeholder="E-mail"></div>
+      <div class="col-md-4"><input type="date" class="form-control"></div>
+      <div class="col-md-4"><input type="time" class="form-control"></div>
+      <div class="col-md-4"><input type="number" class="form-control" placeholder="Pessoas"></div>
+      <div class="col-12"><button class="btn btn-success">Reservar</button></div>
     </form>
   </div>
 </section>
 
 <!-- GALERIA -->
-<section id="galeria" class="py-5">
+<section id="galeria" class="bg-light py-5">
   <div class="container">
-    <h2>Galeria</h2>
+    <h2 class="mb-4">Galeria</h2>
 
-    <div class="row g-3 mt-4">
-      <div class="col-md-4"><img src="img-verdevita/tiramissu.jpg" class="img-fluid rounded"></div>
-      <div class="col-md-4"><img src="img-verdevita/sucos.png" class="img-fluid rounded"></div>
-      <div class="col-md-4"><img src="img-verdevita/espaguete.jpg" class="img-fluid rounded"></div>
+    <div class="row g-4">
+      <div class="col-md-4">
+        <img src="img-verdevita/restaurante1.jpg" class="img-fluid rounded">
+      </div>
+      <div class="col-md-4">
+        <img src="img-verdevita/chef.jpg" class="img-fluid rounded">
+      </div>
+      <div class="col-md-4">
+        <img src="img-verdevita/vegetal.jpg" class="img-fluid rounded">
+      </div>
     </div>
   </div>
 </section>
